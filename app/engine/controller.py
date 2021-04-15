@@ -1,6 +1,7 @@
 import os
 from flask import Flask, jsonify
 from models import User, Product, Category, City
+from service import getUserInfo
 import neomodel
 
 
@@ -12,13 +13,8 @@ def create_app():
     neomodel.config.DATABASE_URL = os.environ['NEO4J_BOLT_URL']
 
     @app.route('/user/<id>', methods=['GET'])
-    def getUserInfo(id):
-        instance = User.nodes.first(uuid=id)
-
-        print(instance)
-        print(instance.lives_in.all())
-        
-        return jsonify([f'{x}' for x in instance.lives_in.all()])
+    def handler(id):
+        return getUserInfo(id)
         
     return app
 
