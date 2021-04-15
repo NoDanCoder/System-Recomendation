@@ -13,18 +13,34 @@ from neomodel import (
 # Relation model classes
 
 class BelongsToRel(StructuredRel):
+    """ Belongs_to relation class
+        On db:
+            (:Product)-[:BELONGS_TO]->(:Category)
+    """
     pass
 
 
 class OrderRel(StructuredRel):
+    """ Order relation class
+        On db:
+            (:User)-[:ORDER]->(:Product)
+    """
     
     times = IntegerProperty()
 
 
 class SupplyRel(StructuredRel):
+    """ Supply relation class
+        On db:
+            (:User)-[:SUPPLY]->(:Category)
+    """
     pass
 
 class LivesInRel(StructuredRel):
+    """ Lives_In relation class
+        On db:
+            (:User)-[:LIVES_IN]->(:City)
+    """
     pass
 
 
@@ -42,6 +58,7 @@ class User(StructuredNode):
 
 
     def to_dict(self):
+        """ Call to get main data to directly handle it """
         return {
             "uuid": self.uuid,
             "name": self.name
@@ -59,6 +76,7 @@ class Product(StructuredNode):
 
     
     def to_dict(self):
+        """ Call to get main data to directly handle it """
         return {
             "uuid": self.uuid,
             "name": self.name,
@@ -74,6 +92,7 @@ class Category(StructuredNode):
 
 
     def to_dict(self):
+        """ Call to get main data to directly handle it """
         return {
             "uuid": self.uuid,
             "name": self.name
@@ -89,6 +108,7 @@ class City(StructuredNode):
 
 
     def to_dict(self):
+        """ Call to get main data to directly handle it """
         return {
             "uuid": self.uuid,
             "name": self.name,

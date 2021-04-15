@@ -1,8 +1,6 @@
 import os
 from flask import Flask, jsonify
-from models import User, Product, Category, City
-from service import getUserInfo
-import neomodel
+from service import getUserInfo, getUserReco
 
 
 
@@ -14,7 +12,13 @@ def create_app():
 
     @app.route('/user/<id>', methods=['GET'])
     def handler(id):
+        """ endpoint to request user info and orders """
         return getUserInfo(id)
+
+    @app.route('/user/recomended/<id>', methods=['GET'])
+    def handler(id):
+        """ endpoint to request user recomendations """
+        return getUserReco(id)
         
     return app
 
