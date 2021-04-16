@@ -1,0 +1,11 @@
+.user-icon {
+    width: 200px;
+    object-fit: cover;
+}
+
+.header__main {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 30px;
+}

@@ -5,7 +5,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={IndexUser} />
+        <Route exact path="/" component={IndexUser} />
       </Switch>
     </Router>
   )
