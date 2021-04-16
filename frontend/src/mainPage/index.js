@@ -1,5 +1,12 @@
+import ProductCard from './productCard'
+
 const IndexUser = () => (
-    <h1>INDEX USER PAGE</h1>
+    <ProductCard 
+        key="13"
+        name="Product 1"
+        description="Description product 1"
+        image="1072"
+    />
 )
 
 export default IndexUser
