@@ -3,6 +3,18 @@ import neomodel
 from models import User, Product, Category, City
 
 
+def formatOutput(function):
+    """ decorator to handle cypher query requests and return json format """
+
+    def wrapper(id):
+        cypher_query = function(id)
+        response = neomodel.db.cypher_query(cypher_query, {"uuid": id})
+        return jsonify([ elem[0] for elem in response[0] ])
+
+    return wrapper
+
+
+@formatOutput
 def getUserInfo(id):
     """ Return user info and history of ordered products
         ordered by most bought
@@ -19,11 +31,11 @@ def getUserInfo(id):
                 })
             }
     """
-    
-    response = neomodel.db.cypher_query(cyper_query, {"uuid": id})
-    return jsonify([ elem[0] for elem in response[0] ])
+
+    return cyper_query
 
 
+@formatOutput
 def getUserReco(id):
     """ Return user recomendated products based on previous orderers
         or related users orders, ordered by popularity
@@ -43,10 +55,11 @@ def getUserReco(id):
                 })
             }
     """
-    response = neomodel.db.cypher_query(cyper_query, {"uuid": id})
-    return jsonify([ elem[0] for elem in response[0] ])
+
+    return cyper_query
 
 
+@formatOutput
 def getUserRecoOthers(id):
     """ Return user recomendated products based on similar
         cusromers behavior, ordered by similarity of consumption between customers
@@ -65,6 +78,5 @@ def getUserRecoOthers(id):
                 })
             }
     """
-    
-    response = neomodel.db.cypher_query(cyper_query, {"uuid": id})
-    return jsonify([ elem[0] for elem in response[0] ])
+
+    return cyper_query

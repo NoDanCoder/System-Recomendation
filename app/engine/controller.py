@@ -4,7 +4,6 @@ from service import getUserInfo, getUserReco, getUserRecoOthers
 import neomodel
 
 
-
 def create_app():
     """ app start point and API endpoing """
     
