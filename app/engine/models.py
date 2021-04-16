@@ -89,7 +89,7 @@ class Category(StructuredNode):
 
     uuid = UniqueIdProperty()
     name = StringProperty(unique_index=True, required=True)
-
+    
 
     def to_dict(self):
         """ Call to get main data to directly handle it """

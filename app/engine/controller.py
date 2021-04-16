@@ -1,6 +1,7 @@
 import os
 from flask import Flask, jsonify
-from service import getUserInfo, getUserReco
+from service import getUserInfo, getUserReco, getUserRecoOthers
+import neomodel
 
 
 
@@ -11,15 +12,24 @@ def create_app():
     neomodel.config.DATABASE_URL = os.environ['NEO4J_BOLT_URL']
 
     @app.route('/user/<id>', methods=['GET'])
-    def handler(id):
+    def handlerUser(id):
         """ endpoint to request user info and orders """
         return getUserInfo(id)
 
-    @app.route('/user/recomended/<id>', methods=['GET'])
-    def handler(id):
-        """ endpoint to request user recomendations """
+    @app.route('/user/reco-category/<id>', methods=['GET'])
+    def handler_reco_category(id):
+        """ endpoint to request user recomendations based on
+            categories popularity
+        """
         return getUserReco(id)
-        
+
+    @app.route('/user/reco-users/<id>', methods=['GET'])
+    def handler_reco_users(id):
+        """ endpoint to request user recomendations based on
+            customers similarity
+        """
+        return getUserRecoOthers(id)
+    
     return app
 
 
