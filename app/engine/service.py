@@ -3,10 +3,17 @@ import neomodel
 from models import User, Product, Category, City
 
 
+def errorMesage():
+    return {'error': 'user with given id does not exist'}
+
+
 def formatOutput(function):
     """ decorator to handle cypher query requests and return json format """
 
     def wrapper(id):
+        if not User.nodes.first_or_none(uuid=id):
+            return errorMesage()
+        
         cypher_query = function(id)
         response = neomodel.db.cypher_query(cypher_query, {"uuid": id})
         return jsonify([ elem[0] for elem in response[0] ])
@@ -67,10 +74,15 @@ def getUserRecoOthers(id):
     """
     
     cyper_query = """
-        MATCH (u:User {uuid: $uuid})-[:ORDER]->(:Product)<-[:ORDER]-(:User)-[:ORDER]->(p:Product)
-        WHERE NOT (u)-[:ORDER]->(p) AND (p)-[:BELONGS_TO]->(:Category)<-[:SUPPLY]-(u)
-        WITH p, u, COUNT(p) AS times ORDER BY times DESC
-        RETURN
+        MATCH (u:User {uuid: $uuid})-[:ORDER]->(:Product)<-[o:ORDER]-(ru:User)
+        WITH u, ru, count(o) * sum(o.times) AS score
+
+        MATCH (ru)-[op:ORDER]->(p:Product)
+        WHERE NOT (u)-[:ORDER]->(p) and (p)-[:BELONGS_TO]->(:Category)<-[:SUPPLY]-(u)
+        WITH u, p, ru, score * op.times AS score ORDER BY score DESC
+        WITH u, p, count(p) AS connectedNodes, sum(score) AS endScore
+        WITH u, p, connectedNodes * endScore AS score ORDER BY score DESC
+        RETURN             
             u{
                 .uuid, .name,
                 product: (p{
