@@ -12,8 +12,8 @@ import './userPresentation.css'
 
 const UserPresentation = ({ user }) => {
 
-    const { data, loading, error } = useFetch(`${API_HOST}/user/${user}`)
-    const { name } = (data?.length) ? data[0] : 'NN'
+    const { data, loading, error } = useFetch(`${API_HOST}/user/${user}?prop=name`)
+    const { name } = (data?.length) ? data[0] : "NN"
 
     if (loading)
         return <Loading />

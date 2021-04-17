@@ -92,3 +92,14 @@ def getUserRecoOthers(id):
     """
 
     return cyper_query
+
+
+@formatOutput
+def getUserName(id):
+    """ retrieve user name of give id """
+
+    cyper_query = """
+        MATCH (u:User {uuid: $uuid}) RETURN u{.name}
+    """
+
+    return cyper_query

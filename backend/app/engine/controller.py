@@ -1,7 +1,7 @@
 import os
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
-from service import getUserInfo, getUserReco, getUserRecoOthers
+from service import getUserInfo, getUserReco, getUserRecoOthers, getUserName
 import neomodel
 
 
@@ -15,6 +15,8 @@ def create_app():
     @app.route('/user/<id>', methods=['GET'])
     def handlerUser(id):
         """ endpoint to request user info and orders """
+        if request.args.get('prop') == 'name':
+            return getUserName(id)
         return getUserInfo(id)
 
     @app.route('/user/reco-category/<id>', methods=['GET'])
