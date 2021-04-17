@@ -10,6 +10,8 @@ import './sectionList.css'
 
 const SectionListRender = ( title, products ) => {
 
+    if (!products?.length)
+        return ""
     return (
         <div className="body__main">
             <h2 className="body__main-title">{ title }</h2>

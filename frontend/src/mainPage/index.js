@@ -4,11 +4,27 @@ import { useParams } from 'react-router-dom'
 /* Local Components */
 import Header from './header'
 import BodyLists from './bodyLists'
+import Loading from '../loading/index'
+import Error500 from '../500ServerError/index'
+import Error404 from '../404NotFound/index'
+import useFetch from '../hooks/useFetch'
+
+/* Settings */
+import API_HOST from '../settings'
 
 
 const IndexUser = () => {
 
     const { id } = useParams()
+    const { data, loading, error } = useFetch(`${API_HOST}/user/${id}?prop=name`)
+
+    if (loading)
+        return <Loading />
+    if (error)
+        return <Error500 />
+    if ('error' in data)
+        return <Error404 />
+    
     return (
         <React.Fragment>
             <Header user={ id } />
