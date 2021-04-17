@@ -5,12 +5,10 @@ import Navbar from './navbar'
 import UserPresentation from './userPresentation'
 
 
-const Header = ({ name }) => (
+const Header = ({ user }) => (
     <React.Fragment>
         <Navbar />
-        <UserPresentation 
-            name={name}
-        />
+        <UserPresentation user={ user } />
     </React.Fragment>
 )
 

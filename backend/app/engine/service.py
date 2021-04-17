@@ -34,7 +34,7 @@ def getUserInfo(id):
             u{
                 .uuid, .name,
                 product: (p{
-                    .uuid, .name, .description
+                    .uuid, .name, .description, .image
                 })
             }
     """
@@ -54,10 +54,10 @@ def getUserReco(id):
         RETURN 
             u{
                 .uuid, .name,
-                categor: (c{
+                category: (c{
                     .uuid, .name, 
                     product: (p{
-                        .uuid, .name, .description
+                        .uuid, .name, .description, .image
                     })
                 })
             }
@@ -86,7 +86,7 @@ def getUserRecoOthers(id):
             u{
                 .uuid, .name,
                 product: (p{
-                    .uuid, .name, .description
+                    .uuid, .name, .description, .image
                 })
             }
     """

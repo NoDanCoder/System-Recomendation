@@ -1,22 +1,20 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
 /* Local Components */
-import ProductCard from './productCard'
 import Header from './header'
+import BodyLists from './bodyLists'
 
 
-const IndexUser = () => (
-    <React.Fragment>
-        <Header 
-            name="Daniel"
-        />
-        <ProductCard 
-            key="13"
-            name="Product 1"
-            description="Description product 1"
-            image="1072"
-        />
-    </React.Fragment>
-)
+const IndexUser = () => {
+
+    const { id } = useParams()
+    return (
+        <React.Fragment>
+            <Header user={ id } />
+            <BodyLists user={ id } />
+        </React.Fragment>
+    )
+}
 
 export default IndexUser

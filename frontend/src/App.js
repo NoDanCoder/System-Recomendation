@@ -5,10 +5,10 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={IndexUser} />
+        <Route exact path="/user/:id" component={IndexUser} />
       </Switch>
     </Router>
   )
 }
 
-export default App;
+export default App
