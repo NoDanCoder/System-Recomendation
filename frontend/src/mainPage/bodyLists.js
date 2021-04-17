@@ -26,8 +26,10 @@ const BodyLists = ({ user }) => {
     }))
 
     return (
-        infoToFetch.map( infoToFetch =>
-            <SectionList 
+        
+        infoToFetch.map( ( infoToFetch, index ) =>
+            <SectionList
+                key={index}
                 {...infoToFetch}
             />
         )

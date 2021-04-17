@@ -9,7 +9,7 @@ const ProductCard = ({ name, description, image }) => (
                 <h3 className="card-header">{ name }</h3>
                         
                 <div width="100%" height={200}>
-                    <img className="card-image" src={`https://picsum.photos/id/${ image }/500`} alt={`image ${ name }`} />
+                    <img className="card-image" src={`https://picsum.photos/id/${ image }/500`} alt={`${ name }`} />
                 </div>
                 
                 <div className="card-body">

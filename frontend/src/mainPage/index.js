@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 /* Local Components */
 import Header from './header'
 import BodyLists from './bodyLists'
+import Footer from './footer'
 import Loading from '../loading/index'
 import Error500 from '../500ServerError/index'
 import Error404 from '../404NotFound/index'
@@ -27,8 +28,11 @@ const IndexUser = () => {
     
     return (
         <React.Fragment>
-            <Header user={ id } />
-            <BodyLists user={ id } />
+            <Header name={ data[0].name } />
+            <div className="pb-5">
+                <BodyLists user={ id } />
+            </div>
+            <Footer />
         </React.Fragment>
     )
 }

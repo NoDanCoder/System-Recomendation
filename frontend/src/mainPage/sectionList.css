@@ -13,3 +13,22 @@
 .body__main-title {
     margin: 20px 0 40px 0;
 }
+
+.empty-box {
+    height: 314px;
+    background-color: rgb(199, 199, 199);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    grid-column-start: span 3;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty-box p {
+    font-size: 1.5em;
+    margin: 0;
+}

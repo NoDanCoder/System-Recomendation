@@ -10,17 +10,23 @@ import './sectionList.css'
 
 const SectionListRender = ( title, products ) => {
 
-    if (!products?.length)
-        return ""
     return (
         <div className="body__main">
             <h2 className="body__main-title">{ title }</h2>
             <div className="body__main-list">
-                {products.map( elem => {
-                    if ("product" in elem)
-                        return <ProductCard {...elem.product} />
-                    return<ProductCard {...elem.category.product} />
-                })}
+                {
+                    products?.length ? (
+                        products.map( elem => {
+                            if ("product" in elem)
+                                return <ProductCard key={elem.product.uuid} {...elem.product} />
+                            return<ProductCard key={elem.category.product.uuid} {...elem.category.product} />
+                        })
+                    ) : (
+                        <div className="empty-box">
+                            <p>Nothing here :(, check our recomendtion categories section :D</p>
+                        </div>
+                    )
+                }
             </div>
         </div>
     )
