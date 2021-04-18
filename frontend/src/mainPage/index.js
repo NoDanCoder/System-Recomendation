@@ -13,6 +13,9 @@ import useFetch from '../hooks/useFetch'
 /* Settings */
 import API_HOST from '../settings'
 
+/* CSS */
+import './index.css'
+
 
 const IndexUser = () => {
 
@@ -20,7 +23,7 @@ const IndexUser = () => {
     const { data, loading, error } = useFetch(`${API_HOST}/user/${id}?prop=name`)
 
     if (loading)
-        return <Loading />
+        return <div className="loading-state"><Loading /></div>
     if (error)
         return <Error500 />
     if ('error' in data)
