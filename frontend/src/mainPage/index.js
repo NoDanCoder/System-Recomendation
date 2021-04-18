@@ -32,7 +32,7 @@ const IndexUser = () => {
     return (
         <React.Fragment>
             <Header name={ data[0].name } />
-            <div className="pb-5">
+            <div className="pb-5 mx-3">
                 <BodyLists user={ id } />
             </div>
             <Footer />

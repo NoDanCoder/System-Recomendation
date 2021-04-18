@@ -12,7 +12,7 @@ const SectionListRender = ( title, products ) => {
 
     return (
         <div className="body__main">
-            <h2 className="body__main-title">{ title }</h2>
+            <h2 className="body__main-title pl-3">{ title }</h2>
             <div className="body__main-list">
                 {
                     products?.length ? (
@@ -22,7 +22,7 @@ const SectionListRender = ( title, products ) => {
                             return<ProductCard key={elem.category.product.uuid} {...elem.category.product} />
                         })
                     ) : (
-                        <div className="empty-box">
+                        <div className="empty-box px-5">
                             <p>Nothing here :(, check our recomendtion categories section :D</p>
                         </div>
                     )

@@ -9,3 +9,15 @@
     gap: 60px;
     margin-bottom: 30px;
 }
+
+@media only screen and (max-width: 1214px) {
+    .header__main {
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 794px) {
+    .header__main {
+        align-items: center;
+    }
+}

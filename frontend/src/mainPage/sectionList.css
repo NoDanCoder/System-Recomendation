@@ -21,7 +21,7 @@
     margin: 0;
     padding: 0;
 
-    grid-column-start: span 3;
+    grid-column: 1 / -1;
 
     display: flex;
     justify-content: center;
@@ -31,4 +31,17 @@
 .empty-box p {
     font-size: 1.5em;
     margin: 0;
+}
+
+
+@media only screen and (max-width: 1214px) {
+    .body__main-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 732px) {
+    .body__main-list {
+        grid-template-columns: repeat(1 , 1fr);
+    }
 }
