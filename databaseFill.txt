@@ -1,0 +1,109 @@
+//---------------------------------------db--------------------------------------------
+create database retaildb;
+:use retaildb
+
+
+//--------------------------------------products---------------------------------------
+CREATE (p:Product {image: 146, name: 'Product 9', description: 'General descripcion product 9', uuid: randomUUID()});
+CREATE (p:Product {image: 145, name: 'Product 8', description: 'General descripcion product 8', uuid: randomUUID()});
+CREATE (p:Product {image: 143, name: 'Product 7', description: 'General descripcion product 7', uuid: randomUUID()});
+CREATE (p:Product {image: 139, name: 'Product 6', description: 'General descripcion product 6', uuid: randomUUID()});
+CREATE (p:Product {image: 134, name: 'Product 5', description: 'General descripcion product 5', uuid: randomUUID()});
+CREATE (p:Product {image: 1080, name: 'Product 4', description: 'General descripcion product 4', uuid: randomUUID()});
+CREATE (p:Product {image: 1075, name: 'Product 3', description: 'General descripcion product 3', uuid: randomUUID()});
+CREATE (p:Product {image: 1073, name: 'Product 2', description: 'General descripcion product 2', uuid: randomUUID()});
+CREATE (p:Product {image: 1072, name: 'Product 1', description: 'General descripcion product 1', uuid: randomUUID()});
+
+
+//--------------------------------------categories-------------------------------------
+CREATE (c:Category {name: 'Category 3', uuid: randomUUID()});
+CREATE (c:Category {name: 'Category 2', uuid: randomUUID()});
+CREATE (c:Category {name: 'Category 1', uuid: randomUUID()});
+
+
+//--------------------------------------users-------------------------------------
+CREATE (u:User {name: 'Company 7', uuid: randomUUID()});
+CREATE (u:User {name: 'Company 6', uuid: randomUUID()});
+CREATE (u:User {name: 'Company 5', uuid: randomUUID()});
+CREATE (u:User {name: 'Company 4', uuid: randomUUID()});
+CREATE (u:User {name: 'Company 3', uuid: randomUUID()});
+CREATE (u:User {name: 'Company 2', uuid: randomUUID()});
+CREATE (u:User {name: 'Company 1', uuid: randomUUID()});
+
+
+//-------------------------------product-------BELONGS_TO-------category-------------------------------
+MATCH (p:Product {name: 'Product 1'}), (c:Category {name: 'Category 1'}) CREATE (p)-[b:BELONGS_TO]->(c);
+MATCH (p:Product {name: 'Product 2'}), (c:Category {name: 'Category 1'}) CREATE (p)-[b:BELONGS_TO]->(c);
+MATCH (p:Product {name: 'Product 3'}), (c:Category {name: 'Category 1'}) CREATE (p)-[b:BELONGS_TO]->(c);
+
+MATCH (p:Product {name: 'Product 4'}), (c:Category {name: 'Category 2'}) CREATE (p)-[b:BELONGS_TO]->(c);
+MATCH (p:Product {name: 'Product 5'}), (c:Category {name: 'Category 2'}) CREATE (p)-[b:BELONGS_TO]->(c);
+MATCH (p:Product {name: 'Product 6'}), (c:Category {name: 'Category 2'}) CREATE (p)-[b:BELONGS_TO]->(c);
+
+MATCH (p:Product {name: 'Product 7'}), (c:Category {name: 'Category 3'}) CREATE (p)-[b:BELONGS_TO]->(c);
+MATCH (p:Product {name: 'Product 8'}), (c:Category {name: 'Category 3'}) CREATE (p)-[b:BELONGS_TO]->(c);
+MATCH (p:Product {name: 'Product 9'}), (c:Category {name: 'Category 3'}) CREATE (p)-[b:BELONGS_TO]->(c);
+
+
+//-------------------------------user-------ORDER-------product-------------------------------
+MATCH (p:Product {name: 'Product 1'}), (u:User {name: 'Company 1'}) CREATE (u)-[o:ORDER {times: 1}]->(p);
+
+MATCH (p:Product {name: 'Product 1'}), (u:User {name: 'Company 2'}) CREATE (u)-[o:ORDER {times: 5}]->(p);
+MATCH (p:Product {name: 'Product 2'}), (u:User {name: 'Company 2'}) CREATE (u)-[o:ORDER {times: 10}]->(p);
+MATCH (p:Product {name: 'Product 3'}), (u:User {name: 'Company 2'}) CREATE (u)-[o:ORDER {times: 1}]->(p);
+MATCH (p:Product {name: 'Product 7'}), (u:User {name: 'Company 2'}) CREATE (u)-[o:ORDER {times: 4}]->(p);
+
+MATCH (p:Product {name: 'Product 1'}), (u:User {name: 'Company 3'}) CREATE (u)-[o:ORDER {times: 2}]->(p);
+MATCH (p:Product {name: 'Product 3'}), (u:User {name: 'Company 3'}) CREATE (u)-[o:ORDER {times: 5}]->(p);
+
+MATCH (p:Product {name: 'Product 4'}), (u:User {name: 'Company 5'}) CREATE (u)-[o:ORDER {times: 5}]->(p);
+MATCH (p:Product {name: 'Product 5'}), (u:User {name: 'Company 5'}) CREATE (u)-[o:ORDER {times: 10}]->(p);
+MATCH (p:Product {name: 'Product 7'}), (u:User {name: 'Company 5'}) CREATE (u)-[o:ORDER {times: 10}]->(p);
+
+MATCH (p:Product {name: 'Product 5'}), (u:User {name: 'Company 6'}) CREATE (u)-[o:ORDER {times: 1}]->(p);
+MATCH (p:Product {name: 'Product 6'}), (u:User {name: 'Company 6'}) CREATE (u)-[o:ORDER {times: 6}]->(p);
+
+MATCH (p:Product {name: 'Product 1'}), (u:User {name: 'Company 7'}) CREATE (u)-[o:ORDER {times: 5}]->(p);
+MATCH (p:Product {name: 'Product 7'}), (u:User {name: 'Company 7'}) CREATE (u)-[o:ORDER {times: 9}]->(p);
+MATCH (p:Product {name: 'Product 8'}), (u:User {name: 'Company 7'}) CREATE (u)-[o:ORDER {times: 10}]->(p);
+MATCH (p:Product {name: 'Product 9'}), (u:User {name: 'Company 7'}) CREATE (u)-[o:ORDER {times: 2}]->(p);
+
+
+//-------------------------------user-------SUPPLY-------category-------------------------------
+MATCH (c:Category {name: 'Category 1'}), (u:User {name: 'Company 1'}) CREATE (u)-[s:SUPPLY]->(c);
+MATCH (c:Category {name: 'Category 2'}), (u:User {name: 'Company 1'}) CREATE (u)-[s:SUPPLY]->(c);
+
+MATCH (c:Category {name: 'Category 1'}), (u:User {name: 'Company 2'}) CREATE (u)-[s:SUPPLY]->(c);
+MATCH (c:Category {name: 'Category 3'}), (u:User {name: 'Company 2'}) CREATE (u)-[s:SUPPLY]->(c);
+
+MATCH (c:Category {name: 'Category 1'}), (u:User {name: 'Company 3'}) CREATE (u)-[s:SUPPLY]->(c);
+
+MATCH (c:Category {name: 'Category 2'}), (u:User {name: 'Company 4'}) CREATE (u)-[s:SUPPLY]->(c);
+
+MATCH (c:Category {name: 'Category 2'}), (u:User {name: 'Company 5'}) CREATE (u)-[s:SUPPLY]->(c);
+MATCH (c:Category {name: 'Category 3'}), (u:User {name: 'Company 5'}) CREATE (u)-[s:SUPPLY]->(c);
+
+MATCH (c:Category {name: 'Category 2'}), (u:User {name: 'Company 6'}) CREATE (u)-[s:SUPPLY]->(c);
+
+MATCH (c:Category {name: 'Category 1'}), (u:User {name: 'Company 7'}) CREATE (u)-[s:SUPPLY]->(c);
+MATCH (c:Category {name: 'Category 2'}), (u:User {name: 'Company 7'}) CREATE (u)-[s:SUPPLY]->(c);
+MATCH (c:Category {name: 'Category 3'}), (u:User {name: 'Company 7'}) CREATE (u)-[s:SUPPLY]->(c);
+
+
+//--------------------------------------------cities-------------------------------------------------------
+CREATE (c:City {name: 'Bogota', uuid: randomUUID(), countryCode: 'COL'});
+CREATE (c:City {name: 'Medellin', uuid: randomUUID(), countryCode: 'COL'});
+CREATE (c:City {name: 'Cartagena', uuid: randomUUID(), countryCode: 'COL'});
+
+
+//--------------------------------------user-----LIVES_IN-----city--------------------------------------
+MATCH (u:User {name: 'Company 1'}), (c:City {name: 'Bogota'}) CREATE (u)-[l:LIVES_IN]->(c);
+MATCH (u:User {name: 'Company 5'}), (c:City {name: 'Bogota'}) CREATE (u)-[l:LIVES_IN]->(c);
+MATCH (u:User {name: 'Company 6'}), (c:City {name: 'Bogota'}) CREATE (u)-[l:LIVES_IN]->(c);
+
+MATCH (u:User {name: 'Company 2'}), (c:City {name: 'Medellin'}) CREATE (u)-[l:LIVES_IN]->(c);
+MATCH (u:User {name: 'Company 3'}), (c:City {name: 'Medellin'}) CREATE (u)-[l:LIVES_IN]->(c);
+MATCH (u:User {name: 'Company 7'}), (c:City {name: 'Medellin'}) CREATE (u)-[l:LIVES_IN]->(c);
+
+MATCH (u:User {name: 'Company 4'}), (c:City {name: 'Cartagena'}) CREATE (u)-[l:LIVES_IN]->(c);
+

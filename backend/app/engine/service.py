@@ -79,9 +79,8 @@ def getUserRecoOthers(id):
 
         MATCH (ru)-[op:ORDER]->(p:Product)
         WHERE NOT (u)-[:ORDER]->(p) and (p)-[:BELONGS_TO]->(:Category)<-[:SUPPLY]-(u)
-        WITH u, p, ru, score * op.times AS score ORDER BY score DESC
-        WITH u, p, count(p) AS connectedNodes, sum(score) AS endScore
-        WITH u, p, connectedNodes * endScore AS score ORDER BY score DESC
+        WITH u, p, ru, score * op.times AS score
+        WITH u, p, count(p) * sum(score) AS score ORDER BY score DESC
         RETURN             
             u{
                 .uuid, .name,
