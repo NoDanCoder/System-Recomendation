@@ -38,14 +38,14 @@ Make you sure env variables are settend to login into database, for more info ch
 You can get into:
 ```
     http://localhost:3000/user/:id
-    ```
+```
 
-    Ro retrieve data and recomendation sample of given user throughout his id.
+To retrieve data and recomendation sample of given user throughout his id.
 
-    ## Contributing
-    Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-    Please make sure to update tests as appropriate.
+Please make sure to update tests as appropriate.
 
-    ## License
-    [MIT](https://choosealicense.com/licenses/mit/)
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
